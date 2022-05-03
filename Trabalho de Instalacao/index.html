@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descrição</title>
+</head>
+<body>
+   
+<h3>Disciplina:</h3> <p>GCC 125- Redes de Computadores</p>
+
+<h3>Professor:</h3> <p>Hermes Pimenta de Moraes Júnior</p>
+<h3>Integrantes:</h3>
+<p>Gabriel Nathan Almeida Silva - 22A - 201811135
+<br>
+Vitória Alvim da Silva - 14A - 201710224 </p>
+
+<h3>Relatórios</h3>
+
+<hr>
+<h4>Relatório de instalação rede I</h4>
+<p>
+(arquivo disponível no diretório /var/www/html/redes.com/PDFs)
+<br>
+<br>
+    <b>Identificação dos integrantes do grupo</b>
+    <br>
+    <ul>
+        <li>
+            Gabriel Nathan Almeida Silva - 22A
+        </li>
+        <li>
+            Vitória Alvim da Silva - 14A
+        </li>
+    </ul>
+
+<b>Identificação da VM utilizada (Nome e IP)</b>
+<ul>
+    <li>
+        Usuário: aluno
+    </li>
+    <li>
+        IP: 192.168.1.18
+    </li>
+
+
+</ul>
+
+<b>Identificação da etapa executada (serviços instalados)</b>
+<ul>
+    <li>
+        Apache2
+    </li>
+    <li>
+        Ntp
+    </li>
+</ul>
+
+<b>Passo-a-passo executado para a conclusão do trabalho</b>
+<br>
+Apache2:
+<ul>
+    <li>
+        sudo apt-get install apache 2 (instalção)
+    </li>
+    <li>
+        sudo systemctl status apache2 (verificar status do sistema)
+    </li>
+</ul>
+
+Diretórios:
+
+<ul>
+    <li>
+        Foi criado pastas para a organização dos arquivos com o comando “sudo mkdir -p /var/www/html/Site”
+    </li>
+    <li>
+        Utilizamos o WinSCP para transferir os arquivos para o servidor e depois movemos o arquivo no servidor para /var/www/html/Site com o comando “sudo mv index.html /var/www/html/Site”
+    </li>
+    <li>
+        Utilizamos o comando “sudo chown -R www-data: /var/www/html” para dar permissão para o apache
+    </li>
+    <li>Para configurar o host do Apache utilizamos o comando “sudo nano
+        /etc/apache2/sites-available/redes.com.br.conf” para criar o arquivo e adicionamos
+        as seguintes configurações ao arquivo: <br>
+        <VirtualHost *:80> <br>
+        ServerAdmin aluno@redes.com.br <br>
+        ServerName 192.168.1.18 <br>
+        ServerAlias www.redes.com.br <br>
+        DocumentRoot /var/www/html/redes.com <br>
+        ErrorLog ${APACHE_LOG_DIR}/redes.com.br_error.log <br>
+        CustomLog ${APACHE_LOG_DIR}/redes.com.br_access.log combined <br>
+        </VirtualHost> <br></li>
+    <li>
+        Habilitamos o vhost com o comando: sudo 2ensite redes.com.conf
+    </li>
+    <li>
+        Restartamos o apache: sudo systemctl restart apache2
+    </li>
+</ul>
+Ntp:
+
+<ul>
+    <li>
+        sudo apt-get install ntp (instalação)
+    </li>
+    <li>
+        sudo systemctl status ntp (verificação de status do sistema)
+    </li>
+    <li>
+        Edição das configurações do ntp foi utlizado o comando “sudo nano /etc/ntp.conf” para acessar o arquivo e foi adicionado: <br>
+        server a.ntp.br iburst <br>
+        server b.ntp.br iburst <br>
+        server c.ntp.br iburst <br>
+    </li>
+    <li>
+        Utilizamos o comando”sudo systemctl restart ntp” para dar um restart no sistema
+    </li>
+    <li>
+        Utilizamos o comando “sudo ntpq -p” para verificar se as modificações tinha sido aplicadas
+    </li>
+    <li>
+        sudo systemctl status ntp (verificação de status do sistema)
+    </li>
+</ul>
+<b>Problemas/dificuldades encontradas durante a execução e as soluções adotadas para cada problema/dificuldade</b>
+<ul>
+    <li>
+        Problemas de configuração do ntp e o apache, assistimos tutoriais no youtube, fizemos pesquisas no Google
+    </li>
+    
+</ul>
+
+<b>Procedimentos adotados para a verificação de funcionamento do serviço instalado</b>
+<ul>
+    <li>
+        Utilizamos o comando “sudo systemctl status (nome do serviço)” para verificar o seu status
+    </li>
+    
+</ul>
+
+<hr>
+
+
+
+<h4>Relatório de instalação rede II</h4>
+<p>
+(arquivo disponível no diretório /var/www/html/redes.com/PDFs)
+<br>
+<br>
+    <b>Identificação dos integrantes do grupo</b>
+    <br>
+    <ul>
+        <li>
+            Gabriel Nathan Almeida Silva - 22A
+        </li>
+        <li>
+            Vitória Alvim da Silva - 14A
+        </li>
+    </ul>
+
+<b>Identificação da VM utilizada (Nome e IP)</b>
+<ul>
+    
+    <li>
+        Grupo R: 192.168.1.18
+    </li>
+
+
+</ul>
+
+<b>Identificação da etapa executada (serviços instalados)</b>
+<ul>
+    <li>
+        Instalação ftp(vsftpd), ufw.
+    </li>
+    
+</ul>
+
+<b>Passo-a-passo executado para a conclusão do trabalho</b>
+<br><br>
+Comando para instalação do vsftpd:
+<ul>
+    <li>
+        sudo apt install vsftpd
+    </li>
+</ul>
+
+Verificar instalação:
+<ul>
+    <li>
+        vsftpd -versions
+    </li>
+ 
+</ul>
+
+Comando para instalação do ufw:
+<ul>
+    <li>
+        sudo apt install ufw
+    </li>
+ 
+</ul>
+
+Comando para verificar status:
+<ul>
+    <li>
+        sudo ufw status
+    </li>
+ 
+</ul>
+Comando para habilitar o ufw:
+<ul>
+    <li>
+        sudo ufw enable
+    </li>
+ 
+</ul>
+Comando para dar permissão as portas 20 e 21:
+<ul>
+    <li>
+        sudo ufw allow 20 / tcp
+    </li>
+    <li>
+        sudo ufw allow 21 / tcp
+    </li>
+ 
+</ul>
+
+Comando para dar permissão a uma faixa de portas 40000 a 50000:
+<ul>
+    <li>
+        sudo ufw allow 40000:50000 / tcp
+    </li>
+ 
+</ul>
+
+Comando para verificar status:
+<ul>
+    <li>
+        sudo ufw status
+    </li>
+ 
+</ul>
+
+Comando para editar arquivo de configuração:
+<ul>
+    <li>
+        sudo nano / etc / vsftpd.conf
+    </li>
+    <li>
+        Foram descomentadas e inseridas algumas linhas, o arquivo ficou com essas informações:<br>
+        listen=YES<br>
+        listen_ipv6=NO<br>
+        connect_from_port_20=YES<br>
+        anonymous_enable=NO<br>
+        local_enable=YES<br>
+        write_enable=YES<br>
+        chroot_local_user=YES<br>
+        allow_writeable_chroot=YES<br>
+        secure_chroot_dir=/var/run/vsftpd/empty<br>
+        pam_service_name=vsftpd<br>
+        pasv_enable=YES<br>
+        pasv_min_port=40000<br>
+        pasv_max_port=45000<br>
+        userlist_enable=YES<br>
+        userlist_file=/etc/vsftpd.userlist<br>
+        userlist_deny=NO<br>
+
+    </li>
+ 
+</ul>
+
+
+Comando para criar o arquivo vsftpd.userlist:
+<ul>
+    <li>
+        sudo nano /etc/vsftpd.userlist
+    </li>
+    <li>
+        Foram inseridos no arquivo os usuários: aluno, moraes, aluno, professor
+    </li>
+ 
+</ul>
+
+Comando para vincular o IP do grupo responsável pelo DNS:
+
+<ul>
+    <li>
+        sudo nano /etc/resolv.conf <br>
+        Adicionamos no arquivo: <br>
+        nameserver 192.168.1.8  
+    </li> 
+</ul>
+
+<b>Problemas/dificuldades encontradas durante a execução e as soluções adotadas para cada problema/dificuldade</b>
+<br><br>
+Configuração do ftp:
+<ul>
+    <li>
+        Tivemos dificuldades nas configurações do vsftpd, achamos alguns tutoriais porém existiam muita divergência de informações entre eles, o que causou muita dúvida no processo de configuração.
+
+    </li>
+    <li>
+        Após a configuração do ufw não conseguimos mais fazer conexão via ssh, realizamos algumas pesquisas para entender o motivo e achamos algumas informações que diz respeito a um bloqueio que o firewall está fazendo na conexão via ssh pelo fato de não ter dado permissão via o comando: sudo ufw allow ssh
+
+    </li>
+    
+</ul>
+
+<b>Procedimentos adotados para a verificação de funcionamento do serviço instalado</b>
+<ul>
+    <li>
+        ftp: ftp.grupor.bsi.gcc125.br/
+    </li>
+    <li>
+        dns: www.grupor.bsi.gcc125.br
+    </li>
+    <li>
+        ufw: sudo ufw status
+    </li>
+    <li>
+        vsftpd: vsftpd -versions
+    </li>
+    
+</ul>
+
+<hr>
+
+
+
+</p>
+
+</body>
+</html>
